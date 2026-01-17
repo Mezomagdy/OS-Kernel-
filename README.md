@@ -27,6 +27,57 @@ Key areas covered include:
 - Trap, fault, and interrupt handling
 
 ---
+## 🗺️ Memory Layout
+
+```
+Virtual Address Space (4 GB)
+┌─────────────────────────────────────┐ 0xFFFFFFFF
+│         Invalid Memory              │ PAGE_SIZE
+├─────────────────────────────────────┤ KERNEL_HEAP_MAX
+│                                     │
+│         Kernel Heap (KHEAP)         │ RW/--
+│                                     │
+├─────────────────────────────────────┤ 0xF6000000 (KERNEL_HEAP_START)
+│                                     │
+│     Remapped Physical Memory        │ RW/--
+│                                     │
+├─────────────────────────────────────┤ 0xF0000000 (KERNEL_BASE)
+│  Current Page Table (Kernel RW)     │ PTSIZE
+├─────────────────────────────────────┤ VPT / KERN_STACK_TOP
+│  Scheduler Kernel Stacks (per CPU)  │
+├─────────────────────────────────────┤ USER_LIMIT (0xEF800000)
+│  Current Page Table (User R-)       │
+├─────────────────────────────────────┤ UVPT (0xEF400000)
+│         Free Space                  │
+├─────────────────────────────────────┤ 0xEF000000
+│      Read-Only Environments         │
+├─────────────────────────────────────┤ USER_TOP/UENVS (0xEEC00000)
+│     User Exception Stack            │ PAGE_SIZE
+├─────────────────────────────────────┤ 0xEEBFF000
+│        Invalid Memory               │
+├─────────────────────────────────────┤ USTACKTOP (0xEEBFE000)
+│      Normal User Stack              │
+│              ...                    │
+├─────────────────────────────────────┤ USTACKBOTTOM
+│   User Pages Working Set (Read)     │
+├─────────────────────────────────────┤ USER_HEAP_MAX (0xA0000000)
+│                                     │
+│           User Heap                 │
+│                                     │
+├─────────────────────────────────────┤ USER_HEAP_START (0x80000000)
+│                                     │
+│      Program Code & Data            │
+│                                     │
+├─────────────────────────────────────┤ UTEXT (0x00800000)
+│         Empty Memory                │
+├─────────────────────────────────────┤ 0x00400000
+│     User STAB Data (optional)       │
+├─────────────────────────────────────┤ 0x00200000
+│         Empty Memory                │
+└─────────────────────────────────────┘ 0x00000000
+```
+
+---
 
 ## 🧩 Modules
 
@@ -72,8 +123,8 @@ The kernel is composed of several interconnected modules, each responsible for a
 - Kernel timer and clock
 
 ---
-# My Contributions
-## 🔹 Dynamic Allocator (Kernel Heap Allocation)
+# 💡 My Contributions
+## 🔹 Dynamic Allocator (Kernel Heap Allocation) [lib/dynamic_allocator.c]
 
 I implemented the **Dynamic Allocator module**, responsible for managing dynamic memory allocation inside the kernel.
 
@@ -85,7 +136,7 @@ I implemented the **Dynamic Allocator module**, responsible for managing dynamic
 
 This module provides flexible and efficient dynamic memory management for kernel operations.
 
-![Project Screenshot](https://github.com/user-attachments/assets/a1a758c9-9e5b-45bc-867a-7e493b46dc17)
+<img src="https://github.com/user-attachments/assets/e1be9ce1-0d5d-40ab-b53e-939830ab7d06" width="50%">
 
 ## 🔹 Kernel Synchronization (Locks & Semaphores) [kern/conc]
 
@@ -100,3 +151,14 @@ I implemented the **Kernel Synchronization module**, which provides synchronizat
 - Integrated synchronization mechanisms with the scheduler when needed.
 
 This module ensures safe and correct kernel execution in a concurrent environment.
+---
+## 📘 What I Learned
+
+This project was a major turning point in my learning journey.
+
+- Overcame the fear of working with complex pointer structures, including pointer-to-pointer and linked lists.
+- Gained confidence handling a large-scale system composed of multiple interconnected kernel modules.
+- Learned how to work efficiently within an existing codebase by understanding pre-written functions and extending them instead of starting from scratch.
+- Developed a deeper, practical understanding of core operating system concepts such as stack vs heap.
+- Understood real causes behind common system issues, including deadlocks and scenarios where programs become “Not Responding”.
+
