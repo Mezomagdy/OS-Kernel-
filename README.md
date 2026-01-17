@@ -3,7 +3,6 @@
 <div align="center">
 
 ![FOS](https://img.shields.io/badge/FOS-Educational%20Kernel-blue?style=for-the-badge)
-![Architecture](https://img.shields.io/badge/Target-x86%2032--bit-green?style=for-the-badge)
 
 An educational operating system kernel developed to explore and implement core OS concepts in a practical, low-level environment.
 
@@ -68,10 +67,6 @@ The kernel is composed of several interconnected modules, each responsible for a
 - Hardware interrupt handling
 - Programmable Interrupt Controller (PIC)
 - Kernel timer and clock
-
-### Storage & I/O
-- IDE disk driver
-- Page file management for swapping
 
 ---
 
