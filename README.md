@@ -73,17 +73,18 @@ The kernel is composed of several interconnected modules, each responsible for a
 
 ---
 # My Contributions
-🔹 Dynamic Allocator (DA) [lib\dynamic_allocator.c]
+## 🔹 Dynamic Allocator (Kernel Heap Allocation)
 
-   I implemented the Dynamic Allocator module, responsible for handling small-size memory allocation within the dynamic allocation region
-    Allocation requests are rounded to the nearest power of two.
-    Memory is managed using:
-    A free pages list for unused pages.
-    Multiple free block lists, each corresponding to a fixed block size.
-    If a suitable free block exists, it is allocated directly.
-    If no free block exists, a new page is allocated, split into blocks, and added to the corresponding list.
-    When all blocks in a page are freed, the page is returned back to the free pages list.
-    This module integrates block-level allocation with page-level memory management to ensure efficient memory usage.
+I implemented the **Dynamic Allocator module**, responsible for managing dynamic memory allocation inside the kernel.
+
+- Implemented initialization of the dynamic allocator region.
+- Designed block-based memory allocation with different block sizes.
+- Managed free pages and free blocks using linked lists.
+- Implemented allocation and deallocation of memory blocks.
+- Ensured efficient reuse of memory and correct page reclamation.
+
+This module provides flexible and efficient dynamic memory management for kernel operations.
+
 ![Project Screenshot](https://github.com/user-attachments/assets/a1a758c9-9e5b-45bc-867a-7e493b46dc17)
 
 ## 🔹 Kernel Synchronization (Locks & Semaphores) [kern/conc]
@@ -92,6 +93,8 @@ I implemented the **Kernel Synchronization module**, which provides synchronizat
 
 - Implemented kernel **sleeplocks** to protect critical sections.
 - Implemented **semaphores** for managing access to shared kernel resources.
+- Implemented **channels** to block waiting processes.
+- Ensured correct blocking and wake-up behavior for waiting processes.
 - Ensured correct handling of concurrent kernel threads and processes.
 - Prevented race conditions and inconsistent kernel states.
 - Integrated synchronization mechanisms with the scheduler when needed.
