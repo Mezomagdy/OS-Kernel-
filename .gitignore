@@ -1,0 +1,10 @@
+/bochs.log
+bin/
+obj/
+out/
+*.exe
+*.class
+*.log
+.idea/
+.vscode/
+
