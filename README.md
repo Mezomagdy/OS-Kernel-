@@ -85,3 +85,15 @@ The kernel is composed of several interconnected modules, each responsible for a
     When all blocks in a page are freed, the page is returned back to the free pages list.
     This module integrates block-level allocation with page-level memory management to ensure efficient memory usage.
 ![Project Screenshot](https://github.com/user-attachments/assets/a1a758c9-9e5b-45bc-867a-7e493b46dc17)
+
+## 🔹 Kernel Synchronization (Locks & Semaphores) [kern/conc]
+
+I implemented the **Kernel Synchronization module**, which provides synchronization primitives to manage concurrent execution inside the kernel.
+
+- Implemented kernel **sleeplocks** to protect critical sections.
+- Implemented **semaphores** for managing access to shared kernel resources.
+- Ensured correct handling of concurrent kernel threads and processes.
+- Prevented race conditions and inconsistent kernel states.
+- Integrated synchronization mechanisms with the scheduler when needed.
+
+This module ensures safe and correct kernel execution in a concurrent environment.
